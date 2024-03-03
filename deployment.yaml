@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-site-testing
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: resume-site
+      env: testing
+  template:
+    metadata:
+      labels:
+        app: resume-site
+        env: testing
+    spec:
+      containers:
+        - name: resume-site
+          image: cappybara12/testing-deployment:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: testing
